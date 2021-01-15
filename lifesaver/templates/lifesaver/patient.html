@@ -1,0 +1,11 @@
+{% extends 'lifesaver/main.html' %}
+
+{% block content %}
+
+<h1>SUPERSTAR</h1>
+
+{% for patient in patient %}
+    {{patient.name}}
+{% endfor %}
+
+{% endblock content %}
