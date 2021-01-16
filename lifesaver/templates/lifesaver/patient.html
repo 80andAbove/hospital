@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<h1>SUPERSTAR</h1>
-
-{% for patient in patient %}
-    {{patient.name}}
-{% endfor %}
+<form method="POST">
+    <div class="card card-body">
+        {% csrf_token %}
+        {{form}}
+    </div>
+    <input type="submit" name="Submit">
+</form>
 
 {% endblock content %}
