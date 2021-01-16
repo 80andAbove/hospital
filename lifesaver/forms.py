@@ -37,7 +37,28 @@ class NurseForm(forms.ModelForm):
         fields = ['name']
 
 class PatientForm(ModelForm):
-    
+    name = forms.CharField(widget = forms.TextInput(attrs = 
+    {
+
+            'placeholder': 'Add a New Nurse',
+            'class': 'form-control'
+    }
+    ))
+
+    description = forms.CharField(widget = forms.TextInput(attrs =
+    {
+            'placeholder': "Describe the patient's symptoms",
+            'class': 'form-control'
+    }
+    ))
+
+    department = forms.ModelChoiceField(queryset=Department.objects.all(), widget=forms.Select(attrs=
+    {
+            'class': 'selectpicker',
+            'placeholder': 'Select Department', 
+    }
+    )) 
+
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = ['name', 'description', 'department', 'care', 'status']
