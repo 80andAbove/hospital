@@ -2,12 +2,16 @@
 
 {% block content %}
 
-<form method="POST">
-    <div class="card card-body">
-        {% csrf_token %}
-        {{form}}
-    </div>
-    <input type="submit" name="Submit">
-</form>
+{% for patient in patient %}
+<div>
+	<a class="btn btn-info" href="{% url 'patient_update' patient.id %}">View</a>
+    {{patient.name}}
+    {{patient.status}}
+    {{patient.care}}
+</div>
+    
+{% endfor %}
+
+<a href="{% url 'patient_add' %}">Add</a>
 
 {% endblock content %}

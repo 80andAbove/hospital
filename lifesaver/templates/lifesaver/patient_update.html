@@ -1,0 +1,19 @@
+{% extends 'lifesaver/main.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.management_form}}
+            {% for field in form %}
+                {{field}}
+            {% endfor %}
+
+            <input type="submit" name="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -33,7 +33,16 @@ def index(request):
 
     return render(request, 'lifesaver/index.html', context)
 
+#All Patient Related
+
 def patient(request):
+    patient = Patient.objects.all()
+
+    context = {'patient':patient}
+    return render(request, 'lifesaver/patient.html', context)
+
+def patient_add(request):
+
     patient = Patient.objects.all()
     form = PatientForm()
 
@@ -45,13 +54,31 @@ def patient(request):
         else:
             print("Patient Form is Invalid")
             print(form.errors)
-        return redirect('index')
+        return redirect('patient')
 
-    context = {
-        'patient':patient,
-        'form':form,
-    }
-    return render(request, 'lifesaver/patient.html', context)
+    context = {'form':form,}
+    return render(request, 'lifesaver/patient_add.html', context)
+
+def patient_update(request, pk):
+
+    patient = Patient.objects.get(id=pk)
+    form = PatientForm(instance=patient)
+
+    if request.method == 'POST':
+        form = PatientForm(request.POST, instance=patient)
+        if form.is_valid():
+            print('Update completed')
+            form.save()
+            return redirect('patient')
+        else:
+            print('Update not completed')
+            print(form.errors)
+            
+    context = {'form':form}
+
+    return render(request, 'lifesaver/patient_update.html', context)
+
+#Work Related
 
 def department(request):
     department = Department.objects.all()
