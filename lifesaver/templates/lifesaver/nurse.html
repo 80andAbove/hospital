@@ -1,0 +1,14 @@
+{% extends 'lifesaver/main.html' %}
+
+{% block content %}
+
+{% for nurse in nurse %}
+    {{nurse.name}}
+    {{nurse.report_to}}
+    {{nurse.care}}
+    {{nurse.work_shift}}
+    {{nurse.sector}}
+{% endfor %}
+
+
+{% endblock %}

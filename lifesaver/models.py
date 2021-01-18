@@ -34,7 +34,7 @@ class Nurse(models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
-    department = models.ForeignKey(Department, null=True, blank=True, on_delete=models.CASCADE)
+    sector = models.ForeignKey(Department, null=True, blank=True, on_delete=models.CASCADE)
     reports_to = models.ForeignKey(Doctor, blank=True, null=True, on_delete=models.CASCADE)
     work_shift = models.OneToOneField(WorkShift, default="", blank=True, null=True, on_delete=models.CASCADE)
     

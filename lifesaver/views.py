@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.shortcuts import render
-from .models import Doctor, Nurse, Patient, Department
+from .models import Doctor, Nurse, Patient, Department, WorkShift
 from django.http import HttpResponse
 from .forms import DoctorForm, NurseForm, PatientForm
 
@@ -77,6 +77,33 @@ def patient_update(request, pk):
     context = {'form':form}
 
     return render(request, 'lifesaver/patient_update.html', context)
+
+# Nurse Related
+
+def nurse(request):
+    nurse = Nurse.objects.all()
+    workshift = WorkShift.objects.all()
+    department = Nurse.objects.get('sector')
+
+    context = {'nurse':nurse, 'workshift':workshift, 'sector':sector}
+    return render(request, 'lifesaver/nurse.html', context)
+
+def nurse_add(request):
+    nurse = Nurse.objects.all()
+    form = NurseForm()
+
+    if request.method == 'POST':
+        form = NurseForm(request.POST)
+        if form.is_valid():
+            print("Nurse Form is Valid")
+            form.save()
+        else:
+            print("Nurse Form is Invalid")
+            print(form.errors)
+        return redirect('nurse')
+
+    context = {'form':form,}
+    return render(request, 'lifesaver/nurse_add.html', context)
 
 #Work Related
 

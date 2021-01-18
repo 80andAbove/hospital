@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Doctor, Nurse, Patient, Department
+from .models import Doctor, Nurse, Patient, Department, WorkShift
 from django.contrib.auth.forms import UserCreationForm
 
 class DoctorForm(forms.ModelForm):
@@ -62,3 +62,10 @@ class PatientForm(ModelForm):
     class Meta:
         model = Patient
         fields = ['name', 'description', 'department', 'care', 'status']
+
+#Work Related
+
+class WorkShiftForm(ModelForm):
+        class Meta:
+                model = WorkShift
+                fields = '__all__'
