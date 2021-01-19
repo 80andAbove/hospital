@@ -83,10 +83,11 @@ def patient_update(request, pk):
 def nurse(request):
     nurse = Nurse.objects.all()
     workshift = WorkShift.objects.all()
-    department = Nurse.objects.get('sector')
+    department = Department.objects.all()
 
-    context = {'nurse':nurse, 'workshift':workshift, 'sector':sector}
+    context = {'nurse':nurse, 'workshift':workshift, 'department':department}
     return render(request, 'lifesaver/nurse.html', context)
+    
 
 def nurse_add(request):
     nurse = Nurse.objects.all()
