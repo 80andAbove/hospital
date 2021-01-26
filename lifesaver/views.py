@@ -78,12 +78,36 @@ def patient_update(request, pk):
 
     return render(request, 'lifesaver/patient_update.html', context)
 
+#All Doctor Related
+
+def doctor(request):
+
+    doctor = Doctor.object.all()
+
+    context = {}
+    return render(request, 'lifesaver/doctor.html', context)
+
+def doctor_add(request):
+    
+    doctor = Doctor.object.all()
+    form = DoctorForm()
+
+    context = {'doctor':doctor, 'form':form}
+    return render(request, 'lifesaver/doctor')
+
+def doctor_update(request):
+
+    doctor = Doctor.object.all()
+    form = DoctorForm()
+
+    context = {'doctor':doctor, 'form':form}
+
 # Nurse Related
 
 def nurse(request):
     nurse = Nurse.objects.all()
     workshift = WorkShift.objects.all()
-    department = Department.objects.all()
+    department = Nurse.objects.get('sector')
 
     context = {'nurse':nurse, 'workshift':workshift, 'department':department}
     return render(request, 'lifesaver/nurse.html', context)
@@ -105,6 +129,13 @@ def nurse_add(request):
 
     context = {'form':form,}
     return render(request, 'lifesaver/nurse_add.html', context)
+
+def nurse_update(request):
+    nurse = Nurse.objects.all()
+    form = NurseForm()
+
+    context = {}
+    return render(request, 'lifesaver/nurse_update.html', context)
 
 #Work Related
 
