@@ -33,74 +33,42 @@ def index(request):
 
     return render(request, 'lifesaver/index.html', context)
 
-#All Patient Related
-
-def patient(request):
-    patients = Patient.objects.all()
-
-    context = {'patients':patients}
-    return render(request, 'lifesaver/patient.html', context)
-
-def patient_add(request):
-
-    patients = Patient.objects.all()
-    form = PatientForm()
-
-    if request.method == 'POST':
-        form = PatientForm(request.POST)
-        if form.is_valid():
-            print("Patient Form is Valid")
-            form.save()
-        else:
-            print("Patient Form is Invalid")
-            print(form.errors)
-        return redirect('patient')
-
-    context = {'form':form,}
-    return render(request, 'lifesaver/patient_add.html', context)
-
-def patient_update(request, pk):
-
-    patients = Patient.objects.get(id=pk)
-    form = PatientForm(instance=patient)
-
-    if request.method == 'POST':
-        form = PatientForm(request.POST, instance=patient)
-        if form.is_valid():
-            print('Update completed')
-            form.save()
-            return redirect('patient')
-        else:
-            print('Update not completed')
-            print(form.errors)
-            
-    context = {'form':form}
-
-    return render(request, 'lifesaver/patient_update.html', context)
-
 #All Doctor Related
 
 def doctor(request):
 
-    doctors = Doctor.object.all()
+    doctors = Doctor.objects.all()
 
-    context = {}
+    context = {'doctors':doctors}
     return render(request, 'lifesaver/doctor.html', context)
 
 def doctor_add(request):
     
-    doctors = Doctor.object.all()
+    doctors = Doctor.objects.all()
     form = DoctorForm()
 
     context = {'doctors':doctors, 'form':form}
-    return render(request, 'lifesaver/doctor')
+
+    return render(request, 'lifesaver/doctor_add.html', context)
 
 def doctor_update(request):
 
-    doctors = Doctor.object.all()
-    form = DoctorForm()
+    doctors = Doctor.objects.all(id=pk)
+    form = DoctorForm(instance=doctors)
+
+    if request.method == 'POST':
+        form = DoctorForm(request.POST, instance=doctors)
+        if form.is_valid():
+            print('Update completed')
+            form.save()
+            return redirect('doctor')
+        else:
+            print('Update not completed')
+            print(form.errors)
 
     context = {'doctors':doctors, 'form':form}
+
+    return render(request, 'lifesaver/doctor_update.html', context)
 
 # Nurse Related
 
@@ -132,11 +100,66 @@ def nurse_add(request):
     return render(request, 'lifesaver/nurse_add.html', context)
 
 def nurse_update(request):
-    nurses = Nurse.objects.all()
-    form = NurseForm()
+    nurses = Nurse.objects.all(id=pk)
+    form = NurseForm(instance=nurses)
 
-    context = {}
+    if request.method == 'POST':
+        form = NuseForm(request.POST, instance=nurses)
+        if form.is_valid():
+            print('Update completed')
+            form.save()
+            return redirect('nurse')
+        else:
+            print('Update not completed')
+            print(form.errors)
+
+    context = {'form':form}
     return render(request, 'lifesaver/nurse_update.html', context)
+
+#All Patient Related
+
+def patient(request):
+    patients = Patient.objects.all()
+
+    context = {'patients':patients}
+    return render(request, 'lifesaver/patient.html', context)
+
+def patient_add(request):
+
+    patients = Patient.objects.all()
+    form = PatientForm()
+
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            print("Patient Form is Valid")
+            form.save()
+        else:
+            print("Patient Form is Invalid")
+            print(form.errors)
+        return redirect('patient')
+
+    context = {'form':form}
+    return render(request, 'lifesaver/patient_add.html', context)
+
+def patient_update(request, pk):
+
+    patients = Patient.objects.get(id=pk)
+    form = PatientForm(instance=patients)
+
+    if request.method == 'POST':
+        form = PatientForm(request.POST, instance=patients)
+        if form.is_valid():
+            print('Update completed')
+            form.save()
+            return redirect('patient')
+        else:
+            print('Update not completed')
+            print(form.errors)
+            
+    context = {'form':form}
+
+    return render(request, 'lifesaver/patient_update.html', context)
 
 #Work Related
 

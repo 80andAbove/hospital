@@ -3,13 +3,13 @@
 {% block content %}
 
 <h1>hello</h1>
-{% for nurse in nurse %}
-    {{nurse.name}}
-    {{nurse.report_to}}
-    {{nurse.care}}
-    {{nurse.work_shift}}
-    {{nurse.department.name}}
-    {{nurse.nurse_department.name}}
+{% for nurses in nurses %}
+    {{nurses.name}}
+    {{nurses.report_to}}
+    {{nurses.care}}
+    {{nurses.work_shift}}
+    {{nurses.department.name}}
+    {{nurses.nurse_department.name}}
 {% endfor %}
 
 

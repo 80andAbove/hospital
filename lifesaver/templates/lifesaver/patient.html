@@ -2,12 +2,12 @@
 
 {% block content %}
 
-{% for patient in patient %}
+{% for patients in patients %}
 <div>
-	<a class="btn btn-info" href="{% url 'patient_update' patient.id %}">View</a>
-    {{patient.name}}
-    {{patient.status}}
-    {{patient.care}}
+	<a class="btn btn-info" href="{% url 'patient_update' patients.pk %}">View</a>
+    {{patients.name}}
+    {{patients.status}}
+    {{patients.care}}
 </div>
     
 {% endfor %}

@@ -12,16 +12,16 @@ class DoctorForm(forms.ModelForm):
     }
     ))
 
-    department = forms.ModelChoiceField(queryset=Department.objects.all(), widget=forms.Select(attrs=
-    {
-            'class': 'selectpicker',
-            'placeholder': 'Department', 
-    }
-    )) 
+#     department = forms.ModelChoiceField(queryset=Department.objects.all(), widget=forms.Select(attrs=
+#     {
+#             'class': 'selectpicker',
+#             'placeholder': 'Department', 
+#     }
+#     )) 
 
     class Meta:
         model = Doctor
-        fields = ['name', 'department']
+        fields = '__all__'
 
 class NurseForm(forms.ModelForm):
     name = forms.CharField(widget = forms.TextInput(attrs = 
