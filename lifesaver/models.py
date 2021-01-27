@@ -38,6 +38,13 @@ class Nurse(models.Model):
     reports_to = models.ForeignKey(Doctor, blank=True, null=True, on_delete=models.CASCADE)
     work_shift = models.OneToOneField(WorkShift, default="", blank=True, null=True, on_delete=models.CASCADE)
     
+    # in Nurse model
+    def department_name(self):
+        if self.sector_id:
+            return self.sector.name
+        else:
+            return '' # or some other default
+
     def __str__(self):
          return self.name
 

@@ -8,9 +8,9 @@ from .forms import DoctorForm, NurseForm, PatientForm
 
 # Create your views here.
 def index(request):
-    patient = Patient.objects.all()
-    nurse = Nurse.objects.all()
-    doctor = Doctor.objects.all()
+    patients = Patient.objects.all()
+    nurses = Nurse.objects.all()
+    doctors = Doctor.objects.all()
     department = Department.objects.all()
 
     total_patient = patient.count()
@@ -24,8 +24,8 @@ def index(request):
     #     form = 
 
     context = {
-        'patient':patient, 'nurse':nurse,
-        'doctor':doctor, 'total_patient':total_patient,
+        'patients':patients, 'nurses':nurses,
+        'doctors':doctors, 'total_patient ':total_patient,
         'sick':sick, 'healing':healing, 'cured':cured,
         'total_nurse':total_nurse,
         'department':department
@@ -36,14 +36,14 @@ def index(request):
 #All Patient Related
 
 def patient(request):
-    patient = Patient.objects.all()
+    patients = Patient.objects.all()
 
-    context = {'patient':patient}
+    context = {'patients':patients}
     return render(request, 'lifesaver/patient.html', context)
 
 def patient_add(request):
 
-    patient = Patient.objects.all()
+    patients = Patient.objects.all()
     form = PatientForm()
 
     if request.method == 'POST':
@@ -61,7 +61,7 @@ def patient_add(request):
 
 def patient_update(request, pk):
 
-    patient = Patient.objects.get(id=pk)
+    patients = Patient.objects.get(id=pk)
     form = PatientForm(instance=patient)
 
     if request.method == 'POST':
@@ -82,39 +82,40 @@ def patient_update(request, pk):
 
 def doctor(request):
 
-    doctor = Doctor.object.all()
+    doctors = Doctor.object.all()
 
     context = {}
     return render(request, 'lifesaver/doctor.html', context)
 
 def doctor_add(request):
     
-    doctor = Doctor.object.all()
+    doctors = Doctor.object.all()
     form = DoctorForm()
 
-    context = {'doctor':doctor, 'form':form}
+    context = {'doctors':doctors, 'form':form}
     return render(request, 'lifesaver/doctor')
 
 def doctor_update(request):
 
-    doctor = Doctor.object.all()
+    doctors = Doctor.object.all()
     form = DoctorForm()
 
-    context = {'doctor':doctor, 'form':form}
+    context = {'doctors':doctors, 'form':form}
 
 # Nurse Related
 
 def nurse(request):
-    nurse = Nurse.objects.all()
+    nurses = Nurse.objects.all()
     workshift = WorkShift.objects.all()
-    department = Nurse.objects.get('sector')
+    #department = Nurse.objects.get('sector')
+    nurses_department = Nurse.objects.select_related('sector').all()
 
-    context = {'nurse':nurse, 'workshift':workshift, 'department':department}
+    context = {'nurses':nurses, 'workshift':workshift, 'nurses_department':nurses_department}
     return render(request, 'lifesaver/nurse.html', context)
     
 
 def nurse_add(request):
-    nurse = Nurse.objects.all()
+    nurses = Nurse.objects.all()
     form = NurseForm()
 
     if request.method == 'POST':
@@ -125,13 +126,13 @@ def nurse_add(request):
         else:
             print("Nurse Form is Invalid")
             print(form.errors)
-        return redirect('nurse')
+        return redirect('nurses')
 
     context = {'form':form,}
     return render(request, 'lifesaver/nurse_add.html', context)
 
 def nurse_update(request):
-    nurse = Nurse.objects.all()
+    nurses = Nurse.objects.all()
     form = NurseForm()
 
     context = {}
@@ -140,7 +141,7 @@ def nurse_update(request):
 #Work Related
 
 def department(request):
-    department = Department.objects.all()
+    departments = Department.objects.all()
 
-    context = {'department':department}
+    context = {'departments':department}
     return render(request, 'lifesaver/department.html', context)
