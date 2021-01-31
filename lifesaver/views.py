@@ -13,12 +13,12 @@ def index(request):
     doctors = Doctor.objects.all()
     department = Department.objects.all()
 
-    total_patient = patient.count()
-    sick = patient.filter(status='Sick').count()
-    healing = patient.filter(status='Healing').count()
-    cured = patient.filter(status='Cured').count()
+    total_patient = patients.count()
+    sick = patients.filter(status='Sick').count()
+    healing = patients.filter(status='Healing').count()
+    cured = patients.filter(status='Cured').count()
 
-    total_nurse = nurse.count()
+    total_nurse = nurses.count()
 
     # if request.method == 'POST':
     #     form = 
