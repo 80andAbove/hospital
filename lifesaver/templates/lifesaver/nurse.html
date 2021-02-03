@@ -2,15 +2,9 @@
 
 {% block content %}
 
-<h1>hello</h1>
-{% for nurses in nurses %}
-    {{nurses.name}}
-    {{nurses.report_to}}
-    {{nurses.care}}
-    {{nurses.work_shift}}
-    {{nurses.department.name}}
-    {{nurses.nurse_department.name}}
-{% endfor %}
-
+<div id="wrapper">
+    <!-- Sidebar -->
+    <!-- {% include 'lifesaver/sidebar.html' %} -->
+    
 
 {% endblock %}
