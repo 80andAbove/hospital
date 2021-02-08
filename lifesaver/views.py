@@ -3,8 +3,53 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.shortcuts import render
 from .models import Doctor, Nurse, Patient, Department, WorkShift
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.http import HttpResponse
-from .forms import DoctorForm, NurseForm, PatientForm
+from .forms import DoctorForm, NurseForm, PatientForm, CreateUserForm
+
+#Welcome page
+def welcome(request):
+    context = {}
+    return render(request, 'lifesaver/welcome.html', context)
+
+def register(request):
+    context = {}
+    return render(request, 'lifesaver/register.html', context)
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+        print("Success")
+    else:
+        print("Failed")
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password1')
+
+            user = authenticate(request, username=username, password=password)
+            print("Failed 1")
+
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+                print("Failed 2")
+            
+            else:
+                messages.info(request, 'Username or Password is Incorrect')
+                print("Failed 3")
+
+    context = {}
+    return render(request, 'lifesaver/login.html', context)
+
+def forgot_pw(request):
+    
+    context = {}
+    return render(request, 'lifesaver/forgot_pw.html', context)
+
+def logout(request):
+    context = {}
+    return render(request, 'lifesaver/logout.html', context)
 
 # Create your views here.
 def index(request):
