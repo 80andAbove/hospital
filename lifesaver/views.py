@@ -14,7 +14,22 @@ def welcome(request):
     return render(request, 'lifesaver/welcome.html', context)
 
 def register(request):
-    context = {}
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            print("Registeration success")
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, "Account was created for " + user)
+        else:
+            print("Registeration failed")
+            print(form.errors)
+            messages.info(request, "Could not register")
+            return redirect('register')
+        return redirect('login')
+
+    context = {'form':form}
     return render(request, 'lifesaver/register.html', context)
 
 def login(request):
