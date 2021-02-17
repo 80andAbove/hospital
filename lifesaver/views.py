@@ -13,6 +13,10 @@ def welcome(request):
     context = {}
     return render(request, 'lifesaver/welcome.html', context)
 
+def about(request):
+    context = {}
+    return render(request, 'lifesaver/about.html', context)
+
 def register(request):
     form = CreateUserForm()
     if request.method == 'POST':

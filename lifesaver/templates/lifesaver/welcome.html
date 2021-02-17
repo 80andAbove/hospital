@@ -26,8 +26,34 @@
 	<div class="container-fluid">
 	{% block content %}
 
-        
+        <h1>Welcome to Lifesaver</h1>
+        <h5>A Place to Manage Patients and Employees</h5>
 
+        <form method="POST" class="user">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Your username or email" name="username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password1">
+            </div>
+            <input type="submit" class="btn btn-primary btn-user btn-block" placheholder="Login">
+        </form>
+        <br>
+        <ul>
+            <li>
+                <a href="{% url 'register' %}">Sign up</a>
+            </li>
+            <br>
+            <li>
+                <a href="{% url 'about' %}">About us</a>
+            </li>
+            <br>
+            <li>
+                <a href="">Learn more</a>
+            </li>
+            <br>
+        </ul>
 	{% endblock %}
     </div>
 	<hr>
