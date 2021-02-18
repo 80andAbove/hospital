@@ -10,6 +10,27 @@ from .forms import DoctorForm, NurseForm, PatientForm, CreateUserForm
 
 #Welcome page
 def welcome(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+        print("Success")
+    else:
+        print("Failed")
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password1')
+
+            user = authenticate(request, username=username, password=password)
+            message.info(request, 'Username is Not Found in Our Database')
+
+            if user is not None:
+                print("Failed 2")
+                login(request, user)
+                return redirect('index')
+            
+            else:
+                print("Failed 3")
+                messages.info(request, 'Username or Password is Incorrect')
+
     context = {}
     return render(request, 'lifesaver/welcome.html', context)
 
