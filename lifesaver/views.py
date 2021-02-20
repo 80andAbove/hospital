@@ -20,7 +20,7 @@ def welcome(request):
             password = request.POST.get('password1')
 
             user = authenticate(request, username=username, password=password)
-            message.info(request, 'Username is Not Found in Our Database')
+            messages.info(request, 'Username is Not Found in Our Database')
 
             if user is not None:
                 print("Failed 2")
@@ -57,7 +57,7 @@ def register(request):
     context = {'form':form}
     return render(request, 'lifesaver/register.html', context)
 
-def login(request):
+def user_login(request):
     if request.user.is_authenticated:
         return redirect('index')
         print("Success")
@@ -87,7 +87,7 @@ def forgot_pw(request):
     context = {}
     return render(request, 'lifesaver/forgot_pw.html', context)
 
-def logout(request):
+def user_logout(request):
     context = {}
     return render(request, 'lifesaver/logout.html', context)
 
