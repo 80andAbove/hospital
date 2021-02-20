@@ -52,7 +52,7 @@ def register(request):
             print(form.errors)
             messages.info(request, "Could not register")
             return redirect('register')
-        return redirect('login')
+        return redirect('user_login')
 
     context = {'form':form}
     return render(request, 'lifesaver/register.html', context)

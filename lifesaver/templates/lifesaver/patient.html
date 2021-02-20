@@ -2,16 +2,33 @@
 
 {% block content %}
 
-{% for patients in patients %}
-<div>
-	<a class="btn btn-info" href="{% url 'patient_update' patients.pk %}">View</a>
-    {{patients.name}}
-    {{patients.status}}
-    {{patients.care}}
-</div>
-    
-{% endfor %}
+    <br>
+    <h1>Patients</h1>
+    <hr>
 
-<a href="{% url 'patient_add' %}">Add</a>
-
-{% endblock content %}
+    <!-- Card Body -->
+    <div class="card-body">
+        <div class="card shadow">
+            <!-- Card Header - Dropdown -->
+			<div class="card-header d-flex flex-row align-items-center justify-content-between">
+            <h6 class="font-weight-bold text-primary">All Patients</h6>
+            <div class="col-md-10">
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Name</th>
+                            <th>Update</th>
+                        </tr>
+        
+                        {% for patients in patients %}
+                            <tr>
+                                <td>{{patients.name}}</td>
+                                <td><a class="btn btn-sm btn-info" href="#">Update</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
