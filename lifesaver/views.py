@@ -250,6 +250,6 @@ def patient_update(request, pk):
 
 def department(request):
     departments = Department.objects.all()
-
+    
     context = {'departments':department}
     return render(request, 'lifesaver/department.html', context)
