@@ -2,8 +2,12 @@
 
 {% block content %}
 
-{% for department in department %}
-    {{department.name}}
+<br>
+<h1>Departments</h1>
+{% for departments in departments %}
+    {{departments.name}}
 {% endfor %}
+
+<a href="#"><button>Create New Department</button></a>
 
 {% endblock content %}
