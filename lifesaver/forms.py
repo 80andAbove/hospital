@@ -79,3 +79,23 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
+
+class DepartmentForm(ModelForm):
+    name = forms.CharField(widget = forms.TextInput(attrs = 
+    {
+
+            'placeholder': 'Add a New Department',
+            'class': 'form-control'
+    }
+    ))
+
+    description = forms.CharField(widget = forms.TextInput(attrs =
+    {
+            'placeholder': "Describe the Department",
+            'class': 'form-control'
+    }
+    ))
+
+    class Meta:
+        model = Department
+        fields = ['name', 'description']

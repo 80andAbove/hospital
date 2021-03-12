@@ -6,7 +6,7 @@ from .models import Doctor, Nurse, Patient, Department, WorkShift
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponse
-from .forms import DoctorForm, NurseForm, PatientForm, CreateUserForm
+from .forms import DoctorForm, NurseForm, PatientForm, CreateUserForm, DepartmentForm
 
 #Welcome page
 def welcome(request):
@@ -255,6 +255,17 @@ def department(request):
     return render(request, 'lifesaver/department.html', context)
 
 def department_new(request):
-    
-    context = {}
+    departments = Department.objects.all()
+    form = PatientForm()
+
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            print("Department Form is Valid")
+            form.save()
+        else:
+            print("Department Form is Invalid")
+            print(form.errors)
+        return redirect('department')
+    context = {'form':form}
     return render(request, 'lifesaver/department_new.html', context)
