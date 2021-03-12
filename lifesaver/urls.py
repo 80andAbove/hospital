@@ -30,4 +30,5 @@ urlpatterns = [
 
     #Department Related
     path('department/', views.department, name='department'),
+    path('department_new/', views.department_new, name='department_new'),
 ]

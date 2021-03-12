@@ -253,3 +253,8 @@ def department(request):
     
     context = {'departments':department}
     return render(request, 'lifesaver/department.html', context)
+
+def department_new(request):
+    
+    context = {}
+    return render(request, 'lifesaver/department_new.html', context)

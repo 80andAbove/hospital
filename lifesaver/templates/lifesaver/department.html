@@ -8,6 +8,6 @@
     {{departments.name}}
 {% endfor %}
 
-<a href="#"><button>Create New Department</button></a>
+<a href="{% url 'department_new' %}"><button>Create New Department</button></a>
 
 {% endblock content %}
