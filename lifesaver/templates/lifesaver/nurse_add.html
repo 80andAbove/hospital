@@ -1,5 +1,8 @@
 {% extends 'lifesaver/main.html' %}
 
 {% block content %}
+{% for doctors in doctors %}
+    {{form}}
+{% endfor %}
 
-[% endblock %]
+{% endblock %}
