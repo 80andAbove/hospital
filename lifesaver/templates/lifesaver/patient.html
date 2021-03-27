@@ -17,12 +17,18 @@
                     <table class="table table-sm">
                         <tr>
                             <th>Name</th>
+                            <th>Status</th>
+                            <th>Contact</th>
+                            <th>View Patient</th>
                             <th>Update</th>
                         </tr>
         
                         {% for patients in patients %}
                             <tr>
                                 <td>{{patients.name}}</td>
+                                <td>{{patients.sick}}</td>
+                                <td>{{patients.phone}}</td>
+                                <td><a class="btn btn-sm btn-danger" href="#">View</a></td>
                                 <td><a class="btn btn-sm btn-info" href="#">Update</a></td>
                             </tr>
                         {% endfor %}
